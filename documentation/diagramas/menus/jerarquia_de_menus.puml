@@ -1,0 +1,60 @@
+@startuml "Jerarquía de Menús"
+
+class Menu
+
+abstract class SuperMenu {
+    {abstract} # getSuperKwargs(): KwargsDict
+}
+
+class MenuPrincipal extends SuperMenu {
+    - botonJugar: Button
+    - botonOpciones: Button
+    - botonSalir: Button
+
+    # getSuperKwargs(): KwargsDict
+}
+
+class MenuOpciones extends SuperMenu {
+    - volSlider: RangeSlider
+    - audioSwitch: ToggleSwitch
+    - botonVolver: Button
+
+    # getSuperKwargs(): KwargsDict
+    - _cambiarVolumen(vol: Float): Boolean
+    - _cambiarAudio(audio: Boolean): Boolean
+}
+
+Menu <|-- SuperMenu: Hereda de una clase de pygame_menu
+
+class Juego {
+    - volumen: Float
+    - hayAudio: Boolean
+
+    + cambiarVolumen(vol: Float): Boolean
+    + cambiarAudio(audio: Boolean): Boolean
+}
+
+class JuegoHandler {
+    + cambiarVolumen(vol: Float): Boolean
+    + cambiarAudio(audio: Boolean): Boolean
+}
+
+SuperMenu "0...*" --right--o JuegoHandler
+SuperMenu --> JuegoHandler
+JuegoHandler "1" o-- "1" Juego
+
+class Theme
+class Font
+
+class FuenteMinecraftia extends Font {
+
+}
+
+class TemaFresh extends Theme {
+
+}
+
+SuperMenu -left-> FuenteMinecraftia
+SuperMenu -left-> TemaFresh
+
+@enduml

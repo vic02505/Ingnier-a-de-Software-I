@@ -1,0 +1,16 @@
+{
+    "Izquierda": [
+        "a",
+        "left"
+    ],
+    "Derecha": [
+        "d",
+        "right"
+    ],
+    "Salto": [
+        "space"
+    ],
+    "Impulso": [
+        "c"
+    ]
+}
